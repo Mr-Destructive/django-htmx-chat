@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block base %}
+    <h2>{{ name }}</h2>
+    <div hx-ws="connect:/chat/{{ slug }}/">
+        <form hx-ws="send:submit">
+            <input name="message">
+            <input type="submit">
+        </form>  
+     </div>
+  <div id="notifications" >
+    </div>
+
+{% endblock %}

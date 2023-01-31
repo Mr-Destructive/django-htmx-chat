@@ -12,12 +12,12 @@ def room_create(request):
         room = Room.objects.create(name=room_name, slug=room_slug)
         return redirect(reverse('chat', kwargs={'name': room.slug}))
     else:
-        return render(request, 'room.html')
+        return render(request, 'create.html')
 
 def room_join(request):
     if request.method == "POST":
         room_name = request.POST["room_name"]
         room = Room.objects.get(name=room_name)
-        return redirect(reverse('room', kwargs={'name': room.slug}))
+        return redirect(reverse('chat', kwargs={'name': room.slug}))
     else:
         return render(request, 'join.html')
