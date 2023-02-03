@@ -3,7 +3,6 @@
 {% block base %}
     <form method='post' action='#'>
         {% csrf_token %}
-        <input name='username' id='username' placeholder='User Name'>
         <input name='room_name' id='room_name' placeholder='Room Name'>
         <input type='submit' id="submit">
     </form>

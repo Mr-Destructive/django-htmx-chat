@@ -4,9 +4,10 @@
         <meta charset="utf-8" />
         <title>Chat App</title>
         {% load static %}
-        <!--<link rel="stylesheet" href="{% static "css/-atlas.css" %}" >-->
+        <!--<link rel="stylesheet" href="{% static "css/style.css" %}" >-->
         <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
+    <a href="{% url 'index' %}">Home</a>
     <body hx-ext="ws">
         <h1>Back Chat</h1>
         {% block base %}

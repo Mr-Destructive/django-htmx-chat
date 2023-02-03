@@ -94,5 +94,5 @@ CHANNEL_LAYERS = {
 }
 
 AUTH_USER_MODEL = "user.User"
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "login"
