@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "chat",
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -91,3 +92,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }
+
+AUTH_USER_MODEL = "user.User"
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "login"

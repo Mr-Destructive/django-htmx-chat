@@ -7,7 +7,7 @@
         <!--<link rel="stylesheet" href="{% static "css/-atlas.css" %}" >-->
         <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
-    <body>
+    <body hx-ext="ws">
         <h1>Back Chat</h1>
         {% block base %}
         <a href="{% url 'room-join' %}">Join Room</a>

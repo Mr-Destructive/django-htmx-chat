@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from chat.models import Room
 
@@ -5,6 +6,7 @@ def index(request, name):
     room = Room.objects.get(slug=name)
     return render(request, 'room.html', {'name': room.name, 'slug': room.slug})
 
+@login_required
 def room_create(request):
     if request.method == "POST":
         room_name = request.POST["room_name"]
@@ -14,6 +16,7 @@ def room_create(request):
     else:
         return render(request, 'create.html')
 
+@login_required
 def room_join(request):
     if request.method == "POST":
         room_name = request.POST["room_name"]
