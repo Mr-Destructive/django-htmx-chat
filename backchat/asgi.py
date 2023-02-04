@@ -2,7 +2,7 @@ import os
 import django
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chatback.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backchat.settings')
 django.setup()
 
 from channels.auth import AuthMiddlewareStack

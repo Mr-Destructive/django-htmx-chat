@@ -4,7 +4,7 @@ from chat.models import Room
 
 def index(request, name):
     room = Room.objects.get(slug=name)
-    return render(request, 'room.html', {'name': room.name, 'slug': room.slug})
+    return render(request, 'chat/room.html', {'name': room.name, 'slug': room.slug})
 
 @login_required
 def room_create(request):
@@ -14,7 +14,7 @@ def room_create(request):
         room = Room.objects.create(name=room_name, slug=room_slug)
         return redirect(reverse('chat', kwargs={'name': room.slug}))
     else:
-        return render(request, 'create.html')
+        return render(request, 'chat/create.html')
 
 @login_required
 def room_join(request):
@@ -23,4 +23,4 @@ def room_join(request):
         room = Room.objects.get(name=room_name)
         return redirect(reverse('chat', kwargs={'name': room.slug}))
     else:
-        return render(request, 'join.html')
+        return render(request, 'chat/join.html')

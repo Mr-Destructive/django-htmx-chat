@@ -17,8 +17,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "channels",
+
+    "accounts",
     "chat",
-    "user",
 ]
 
 MIDDLEWARE = [
@@ -31,7 +33,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "chatback.urls"
+ROOT_URLCONF = "backchat.urls"
 
 TEMPLATES = [
     {
@@ -49,8 +51,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "chatback.wsgi.application"
-ASGI_APPLICATION = "chatback.asgi.application"
+WSGI_APPLICATION = "backchat.wsgi.application"
+ASGI_APPLICATION = "backchat.asgi.application"
 
 DATABASES = {
     "default": {
@@ -93,6 +95,6 @@ CHANNEL_LAYERS = {
     }
 }
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "accounts.User"
 LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "login"
