@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
+from django.utils.text import slugify
 from chat.models import Room
 
+
+@login_required
 def index(request, name):
     room = Room.objects.get(slug=name)
     return render(request, 'chat/room.html', {'name': room.name, 'slug': room.slug})
@@ -10,7 +13,7 @@ def index(request, name):
 def room_create(request):
     if request.method == "POST":
         room_name = request.POST["room_name"]
-        room_slug= room_name.replace(' ', '_').replace("'", "_")
+        room_slug = slugify(room_name)
         room = Room.objects.create(name=room_name, slug=room_slug)
         return redirect(reverse('chat', kwargs={'name': room.slug}))
     else:
