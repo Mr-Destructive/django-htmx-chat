@@ -3,7 +3,7 @@
 {% block base %}
     <form method='post' action='{% url 'room-join' %}'>
         {% csrf_token %}
-        <input name='room_name' id='room_name' placeholder='Room Name'>
+        <input name='room_name' id='room_name' required="true" placeholder='Room Code'>
         <input type='submit' id="submit">
     </form>
 {% endblock %}

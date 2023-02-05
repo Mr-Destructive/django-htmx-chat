@@ -2,6 +2,7 @@
 
 {% block base %}
     <h2>{{ name }}</h2>
+    <p>Room Code: {{ slug }}</p>
     <div hx-ws="connect:/chat/{{ slug }}/">
         <form hx-ws="send:submit">
             <input name="message">
@@ -15,5 +16,5 @@
             <input name="message">
         </form>
     -->
-     <div id='notifications'></div>
+     <div id='messages'></div>
 {% endblock %}
