@@ -3,18 +3,18 @@
 {% block base %}
     <h2>{{ name }}</h2>
     <p>Room Code: {{ slug }}</p>
-    <div hx-ws="connect:/chat/{{ slug }}/">
+    {# <div hx-ws="connect:/chat/{{ slug }}/"> #}
+    <!--
         <form hx-ws="send:submit">
             <input name="message">
             <input type="submit">
         </form>  
-     </div>
-    <!--
-        {# <div hx-ext="ws" ws-connect="/chat/{{ slug }}/"> #}
     </div>
+    -->
+    <div ws-connect="/chat/{{ slug }}/">
         <form ws-send>
             <input name="message">
         </form>
-    -->
-     <div id='messages'></div>
+         <div id='messages'></div>
+    </div>
 {% endblock %}
