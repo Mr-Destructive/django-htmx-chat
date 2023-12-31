@@ -19,11 +19,13 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
+    readonly_fields = ["created_at"]
+    
     list_display = (
         "room",
         "user",
         "message",
-        "created_at",
+
     )
     search_fields = (
         "room",

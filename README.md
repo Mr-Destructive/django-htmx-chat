@@ -17,7 +17,7 @@ Demo:
 ## Requirements:
 
 - python 3.10
-- django 4.1
+- django 5
 - channels
 - htmx > 1.8.5
 
