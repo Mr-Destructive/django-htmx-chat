@@ -16,9 +16,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "channels",
-
     "accounts",
     "chat",
 ]
@@ -38,7 +36,9 @@ ROOT_URLCONF = "backchat.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["templates",],
+        "DIRS": [
+            "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -94,7 +94,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CHANNEL_LAYERS = {
-    'default': {
+    "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }

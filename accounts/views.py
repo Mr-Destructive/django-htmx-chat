@@ -14,10 +14,10 @@ def register(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             messages.success(
-                request, f"Your account has been created and you are now logged in as {username}"
+                request,
+                f"Your account has been created and you are now logged in as {username}",
             )
             return redirect("index")
     else:
         form = UserRegisterForm()
     return render(request, "accounts/register.html", {"form": form})
-
