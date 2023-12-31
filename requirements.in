@@ -1,0 +1,3 @@
+channels
+daphne
+django==5.0
