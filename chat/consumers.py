@@ -12,19 +12,22 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_group_name = "chat_%s" % self.room_name
         self.user = self.scope["user"]
 
-        await self.channel_layer.group_add(
-            self.room_group_name, self.channel_name
-        )
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
 
         await self.add_user(self.room_name, self.user)
-
         await self.accept()
+
+        messages = await self.get_room_messages(self.room_name)
+        for message in messages:
+            message_html = (
+                f"<div hx-swap-oob='beforeend:#messages'>"
+                f"<p><b>{message['username']}</b>: {message['text']}</p></div>"
+            )
+            await self.send(text_data=json.dumps({"history": message_html}))
 
     async def disconnect(self, close_code):
         await self.remove_user(self.room_name, self.user)
-        await self.channel_layer.group_discard(
-            self.room_group_name, self.channel_name
-        )
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
@@ -33,34 +36,43 @@ class ChatConsumer(AsyncWebsocketConsumer):
         username = user.username
         room = self.room_name
 
-        #await self.save_message(room, user, message)
+        await self.save_message(room, user, message)
 
         await self.channel_layer.group_send(
-            self.room_group_name, 
+            self.room_group_name,
             {
                 "type": "chat_message",
                 "message": message,
-                #"room": room,
+                "room": room,
                 "username": username,
-            }
+            },
         )
 
     async def chat_message(self, event):
         message = event["message"]
-        #room = event["room"]
+        room = event["room"]
         username = event["username"]
 
-
-        message_html = f"<div hx-swap-oob='beforeend:#messages'><p><b>{username}</b>: {message}</p></div>"
+        message_html = (
+            f"<div hx-swap-oob='beforeend:#messages'>"
+            f"<p><b>{username}</b>: {message}</p></div>"
+        )
         await self.send(
             text_data=json.dumps(
-                {
-                    "message": message_html,
-                    #"room": room,
-                    "username": username
-                }
+                {"message": message_html, "room": room, "username": username}
             )
         )
+
+    @sync_to_async
+    def get_room_messages(self, room_slug):
+        room = Room.objects.get(slug=room_slug)
+        messages = Message.objects.filter(room=room).order_by("-created_at")[
+            :50
+        ]  # Adjust the number of messages as needed
+        return [
+            {"text": message.message, "username": message.user.username}
+            for message in messages
+        ]
 
     @sync_to_async
     def save_message(self, room, user, message):
