@@ -17,7 +17,7 @@ Demo:
 ## Requirements:
 
 - python 3.10
-- django 4.1
+- django 5
 - channels
 - htmx > 1.8.5
 
@@ -36,10 +36,11 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-3. Install the required dependencies:
+3. Install the required dependencies, we use pip-tools for managing dependencies
 
 ```
-pip install -r requirements.txt
+pip install pip-tools
+pip-sync
 ```
 
 4. Make Migrations:
@@ -54,3 +55,10 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+6. Create an admin user:
+
+```
+python manage.py createsuperuser
+```
+
+7. Visit the admin panel at http://localhost:8000/admin

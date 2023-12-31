@@ -6,4 +6,7 @@
         <input name='room_name' id='room_name' required="true" placeholder='Room Code'>
         <input type='submit' id="submit">
     </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
 {% endblock %}

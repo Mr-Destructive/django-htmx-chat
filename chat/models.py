@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import User
 
+
 class Room(models.Model):
     name = models.CharField(max_length=128)
     slug = models.SlugField(unique=True)
@@ -17,4 +18,4 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (self.room.name + " - " + str(self.user.username) + " : " + str(self.message))
+        return f"{self.room.name} - {str(self.user.username)} : {str(self.message)}"
