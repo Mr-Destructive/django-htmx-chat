@@ -18,6 +18,4 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (
-            self.room.name + " - " + str(self.user.username) + " : " + str(self.message)
-        )
+        return f"{self.room.name} - {str(self.user.username)} : {str(self.message)}"

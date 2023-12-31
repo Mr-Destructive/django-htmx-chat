@@ -10,7 +10,14 @@ from chat.models import Room
 
 @login_required
 def index(request, slug):
-    room = Room.objects.get(slug=slug)
+    try:
+        room = Room.objects.get(slug=slug)
+    except Room.DoesNotExist:
+        return render(
+            request,
+            "chat/join.html",
+            {"error": "This room does not exist. Please check the name and try again."},
+        )
     return render(request, "chat/room.html", {"name": room.name, "slug": room.slug})
 
 
@@ -20,8 +27,19 @@ def room_create(request):
         return render(request, "chat/create.html")
 
     room_name = request.POST["room_name"]
+
+    try:
+        Room.objects.get(name=room_name)
+        return render(
+            request,
+            "chat/create.html",
+            {"error": "This room already exists. Please try again."},
+        )
+    except Room.DoesNotExist:
+        pass
+
     uid = str("".join(random.choices(string.ascii_letters + string.digits, k=4)))
-    room_slug = slugify(room_name + "_" + uid)
+    room_slug = slugify(f"{room_name}_{uid}")
     room = Room.objects.create(name=room_name, slug=room_slug)
     return redirect(reverse("chat", kwargs={"slug": room.slug}))
 
